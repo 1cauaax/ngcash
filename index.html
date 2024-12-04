@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NG Cash</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain; /* Ajuste para evitar o corte da imagem */
+        }
+
+        .login-box {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .textbox {
+            margin: 10px 0;
+        }
+
+        .textbox input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #000; /* Botão com fundo preto */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #333; /* Cor de fundo do botão ao passar o mouse */
+        }
+
+        #timer {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #4CAF50;
+            display: flex;
+            align-items: center;
+        }
+
+        #timer img {
+            width: 30px;  /* Tamanho da imagem */
+            height: 30px;
+            margin-left: 10px; /* Espaçamento entre o timer e a imagem */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Imagem no topo -->
+        <div class="header">
+            <img src="https://media.discordapp.net/attachments/1279948036704833618/1313872664246616095/images.jpg?ex=6751b6c5&is=67506545&hm=25b22931713965f5a88073c2837ba4cceeeb253071bdc7ef02f9237ff89b6def&=&format=webp" alt="Imagem do site">
+        </div>
+
+        <!-- Formulário de login -->
+        <div class="login-box">
+            <h2>Login</h2>
+            <form action="login.php" method="POST">
+                <div class="textbox">
+                    <input type="text" placeholder="Usuário" name="username" required>
+                </div>
+                <div class="textbox">
+                    <input type="password" placeholder="Senha" name="password" required>
+                </div>
+                <input type="submit" value="Entrar">
+            </form>
+        </div>
+    </div>
+
+    <!-- Timer para resgatar Dragon -->
+    <div id="timer">
+        Tempo restante para resgatar a Dragon: <span id="time">01:00:00</span>
+        <!-- Imagem ao lado do timer -->
+        <img src="https://media.discordapp.net/attachments/1279948036704833618/1313874601649901589/DragonFruit.webp?ex=6751b893&is=67506713&hm=2b0d7f60c7f038c1cb270ef1ece253b14a382c4ba8f5f32626ea1ea47d25bc71&=&format=webp" alt="Dragon" id="dragon-img">
+    </div>
+
+    <script>
+        let timeInSeconds = 3600;
+
+        function updateTimer() {
+            let hours = Math.floor(timeInSeconds / 3600);
+            let minutes = Math.floor((timeInSeconds % 3600) / 60);
+            let seconds = timeInSeconds % 60;
+
+            hours = String(hours).padStart(2, '0');
+            minutes = String(minutes).padStart(2, '0');
+            seconds = String(seconds).padStart(2, '0');
+
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+
+            if (timeInSeconds > 0) {
+                timeInSeconds--;
+            } else {
+                clearInterval(timerInterval);
+            }
+        }
+
+        let timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
